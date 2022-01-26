@@ -1,0 +1,4 @@
+*.swp
+__pycache__/
+ethercat/test_cap/output/
+
