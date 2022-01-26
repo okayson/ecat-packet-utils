@@ -1,6 +1,6 @@
 # ecat-packet-utils
 
-This is EtherCAT packet utilities using python.  
+This is a utility that manipulate EtherCAT packets(e.g.`*.cap`, `*.pcap`) using Python.
 
 ## Requirements
 
