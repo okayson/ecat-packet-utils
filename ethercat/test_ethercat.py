@@ -79,7 +79,7 @@ def test_construct_ecat3():
     assert ecat.datagrams[2].length == 2
 
 def test_loading_packet():
-    input_file  = './test_cap/ethercat_one.cap'
+    input_file  = './test_cap/input/ethercat_one.cap'
 
     fdr = open(input_file, 'rb')
     pcap_reader = dpkt.pcap.Reader(fdr)
@@ -121,8 +121,8 @@ def test_loading_packet():
 def test_dividing_packet():
 
     # prepareation
-    input_file  = './test_cap/ethercat_one.cap'
-    output_file = './test_cap/ethercat_one_div.cap'
+    input_file  = './test_cap/input/ethercat_one.cap'
+    output_file = './test_cap/output/ethercat_one_div.cap'
 
     fdr = open(input_file, 'rb')
     pcap_reader = dpkt.pcap.Reader(fdr)
