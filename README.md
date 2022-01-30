@@ -17,7 +17,16 @@ $ pip3 install pytest
 
 ## Utilities
 
-__**### NOW UNDER CONSTRUCTION...###**__
+The usage of each script is shown by `scriptname -h`.  
+
+### ecshow.py
+
+Show ethercat frames.  
+If you want to filter specific ethernet frame, modify `filter_frame`.  
+If you want to filter specific ethercat datagram, modify `filter_datagram`.  
+
+### ecsplitdatagram.py
+__**### NOW UNDER CONSTRUCTING...###**__
 
 ## About ethercat package
 
