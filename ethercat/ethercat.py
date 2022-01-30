@@ -33,7 +33,7 @@ class EtherCAT(dpkt.Packet):
 
     def __init__(self, *args, **kwargs):
         self.datagrams = []
-        dpkt.Packet.__init__(self, *args, **kwargs)
+        super().__init__(*args, **kwargs)
 
     def __len__(self):
         self._pack_data()
@@ -102,7 +102,7 @@ class EtherCATDatagram(dpkt.Packet):
 
     def __init__(self, *args, **kwargs):
         self.wkc = 0
-        dpkt.Packet.__init__(self, *args, **kwargs)
+        super().__init__(*args, **kwargs)
 
     def __len__(self):
         return self.__hdr_len__ + len(self.data) + ECAT_WKC_LEN
