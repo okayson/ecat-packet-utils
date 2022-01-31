@@ -53,7 +53,7 @@ def show_packets(filename):
 
 def main():
 
-    parser = argparse.ArgumentParser(description='ecshow - show EtherCAT captured packets.')
+    parser = argparse.ArgumentParser(description='Show EtherCAT captured packets.')
     parser.add_argument('filename', help='pcap file')
     args = parser.parse_args()
 
