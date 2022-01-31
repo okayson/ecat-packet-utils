@@ -26,7 +26,10 @@ If you want to filter specific ethernet frame, modify `filter_frame`.
 If you want to filter specific ethercat datagram, modify `filter_datagram`.  
 
 ### ecsplitdatagram.py
-__**### NOW UNDER CONSTRUCTING...###**__
+
+Split and reconstruct the ethercat datagrams in the pcap file.  
+If you want to filter specific ethernet frame, modify `filter_frame`.  
+If you want to filter specific ethercat datagram, modify `filter_datagram`.  
 
 ## About ethercat package
 
