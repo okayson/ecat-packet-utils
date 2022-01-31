@@ -13,11 +13,10 @@ def filter_frame(eth):
 def filter_datagram(datagram):
     # If you want to filter specific datagram, return True.
     # e.g. --->
-    if datagram.wkc == 0:
-        return True
+    # if datagram.wkc == 0:
+    #     return True
     # e.g. <---
     return False
-
 
 def show_packet(no, ts, buf):
     eth = dpkt.ethernet.Ethernet(buf)
