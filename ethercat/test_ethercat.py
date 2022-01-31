@@ -1,7 +1,7 @@
 # How to run tests
 # $ cd /path/to/this-directory
 # $ pytest
-# 
+#
 # Note: Easily run from vim
 #   Run the tests with <F6> when this file is opened in vim-buffer.
 #   => nmap <F6> :!pytest %<CR>
@@ -184,5 +184,38 @@ def test_dividing_packet():
     assert count == 7
 
     fdr.close()
+
+def test_datagram_cmd_name():
+    assert ethercat.get_cmd_name(ethercat.ECAT_CMD_NOP  ) == 'NOP'
+    assert ethercat.get_cmd_name(ethercat.ECAT_CMD_APRD ) == 'APRD'
+    assert ethercat.get_cmd_name(ethercat.ECAT_CMD_APWR ) == 'APWR'
+    assert ethercat.get_cmd_name(ethercat.ECAT_CMD_APRW ) == 'APRW'
+    assert ethercat.get_cmd_name(ethercat.ECAT_CMD_FPRD ) == 'FPRD'
+    assert ethercat.get_cmd_name(ethercat.ECAT_CMD_FPWR ) == 'FPWR'
+    assert ethercat.get_cmd_name(ethercat.ECAT_CMD_FPRW ) == 'FPRW'
+    assert ethercat.get_cmd_name(ethercat.ECAT_CMD_BRD  ) == 'BRD'
+    assert ethercat.get_cmd_name(ethercat.ECAT_CMD_BWR  ) == 'BWR'
+    assert ethercat.get_cmd_name(ethercat.ECAT_CMD_BRW  ) == 'BRW'
+    assert ethercat.get_cmd_name(ethercat.ECAT_CMD_LRD  ) == 'LRD'
+    assert ethercat.get_cmd_name(ethercat.ECAT_CMD_LWR  ) == 'LWR'
+    assert ethercat.get_cmd_name(ethercat.ECAT_CMD_LRW  ) == 'LRW'
+    assert ethercat.get_cmd_name(ethercat.ECAT_CMD_ARMW ) == 'ARMW'
+    assert ethercat.get_cmd_name(ethercat.ECAT_CMD_FRMW ) == 'FRMW'
+
+    assert ethercat.get_cmd_name(0)  == 'NOP'
+    assert ethercat.get_cmd_name(1)  == 'APRD'
+    assert ethercat.get_cmd_name(2)  == 'APWR'
+    assert ethercat.get_cmd_name(3)  == 'APRW'
+    assert ethercat.get_cmd_name(4)  == 'FPRD'
+    assert ethercat.get_cmd_name(5)  == 'FPWR'
+    assert ethercat.get_cmd_name(6)  == 'FPRW'
+    assert ethercat.get_cmd_name(7)  == 'BRD'
+    assert ethercat.get_cmd_name(8)  == 'BWR'
+    assert ethercat.get_cmd_name(9)  == 'BRW'
+    assert ethercat.get_cmd_name(10) == 'LRD'
+    assert ethercat.get_cmd_name(11) == 'LWR'
+    assert ethercat.get_cmd_name(12) == 'LRW'
+    assert ethercat.get_cmd_name(13) == 'ARMW'
+    assert ethercat.get_cmd_name(14) == 'FRMW'
 
 # vim: fdm=marker

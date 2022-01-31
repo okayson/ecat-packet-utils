@@ -1,13 +1,39 @@
-# $Id: ethercat.py $
-# -*- coding: utf-8 -*-
+#!/usr/bin/env python3
+
 """EtherCAT Protocol."""
 
 import dpkt
 import struct
+# from .compat import iteritems
+
+# Global variables {{{
+
+# Ethernet > ethertype
+ETH_TYPE_ECAT = 0x88a4
+
+# EtherCAT > Datagram > Cmd
+ECAT_CMD_NOP   = 0  # No Operation
+ECAT_CMD_APRD  = 1  # Auto Increment Read
+ECAT_CMD_APWR  = 2  # Auto Increment Write  
+ECAT_CMD_APRW  = 3  # Auto Increment Read Write 
+ECAT_CMD_FPRD  = 4  # Configured Address Read  
+ECAT_CMD_FPWR  = 5  # Configured Address Write 
+ECAT_CMD_FPRW  = 6  # Configured Address Read Write 
+ECAT_CMD_BRD   = 7  # Broadcast Read 
+ECAT_CMD_BWR   = 8  # Broadcast Write 
+ECAT_CMD_BRW   = 9  # Broadcast Read Write
+ECAT_CMD_LRD   = 10 # Logical Memory Read 
+ECAT_CMD_LWR   = 11 # Logical Memory Write
+ECAT_CMD_LRW   = 12 # Logical Memory Read Write 
+ECAT_CMD_ARMW  = 13 # Auto Increment Read Multiple Write 
+ECAT_CMD_FRMW  = 14 # Configured Read Multiple Write
+
+# EtherCAT > Datagram > WKC
+ECAT_WKC_LEN = 2
+
+# ethercat Module }}}
 
 # EtherCAT "{{{
-
-ECAT_WKC_LEN = 2
 
 class EtherCAT(dpkt.Packet):
     """EtherCAT Protocol.
@@ -30,6 +56,15 @@ class EtherCAT(dpkt.Packet):
             ('length', 11)      # length, 11bit
         )
     }
+
+    @classmethod
+    def init(cls):
+        pass
+
+    @classmethod
+    def is_ethercat(cls, eth):
+        # eth is instance of Ethernet()
+        return (eth.type == ETH_TYPE_ECAT)
 
     def __init__(self, *args, **kwargs):
         self.datagrams = []
@@ -70,6 +105,8 @@ class EtherCAT(dpkt.Packet):
 # EtherCAT "}}}
 
 # EtherCAT Datagram "{{{
+def get_cmd_name(cmd):
+    return EtherCATDatagram.get_cmd_name(cmd)
 
 class EtherCATDatagram(dpkt.Packet):
     """EtherCAT Datagram.
@@ -96,9 +133,27 @@ class EtherCATDatagram(dpkt.Packet):
         )
     }
     __pprint_funcs__ = {
-        'interrupt': hex,
+        'cmd': get_cmd_name,
         'offsetaddr': hex,
+        'interrupt': hex,
     }
+
+    __cmd_names = {}
+
+    @classmethod
+    def init(cls):
+
+        __cmd_names = {}
+
+        g = globals()
+        for k, v in g.items():
+            if k.startswith('ECAT_CMD_'):
+                name = k[9:]
+                cls.__cmd_names[v] = name
+
+    @classmethod
+    def get_cmd_name(cls, cmd):
+        return cls.__cmd_names.get(cmd, None)
 
     def __init__(self, *args, **kwargs):
         self.wkc = 0

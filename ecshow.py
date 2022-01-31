@@ -5,8 +5,6 @@ import dpkt
 import ethercat
 
 def filter_frame(eth):
-    if eth.type != 0x88a4:
-        return 
     # If you want to filter specific ethernet frame, return True.
     return False
 
@@ -20,6 +18,8 @@ def filter_datagram(datagram):
 
 def show_packet(no, ts, buf):
     eth = dpkt.ethernet.Ethernet(buf)
+    if not ethercat.EtherCAT.is_ethercat(eth):
+        return 
     if filter_frame(eth):
         return 
 
